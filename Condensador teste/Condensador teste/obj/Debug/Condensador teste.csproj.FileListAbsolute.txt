@@ -1,0 +1,7 @@
+C:\Users\joaoo\source\repos\Condensador teste\Condensador teste\obj\Debug\Condensador teste.csproj.AssemblyReference.cache
+C:\Users\joaoo\source\repos\Condensador teste\Condensador teste\obj\Debug\Condensador_teste.Form1.resources
+C:\Users\joaoo\source\repos\Condensador teste\Condensador teste\obj\Debug\Condensador_teste.Properties.Resources.resources
+C:\Users\joaoo\source\repos\Condensador teste\Condensador teste\obj\Debug\Condensador teste.csproj.GenerateResource.cache
+C:\Users\joaoo\source\repos\Condensador teste\Condensador teste\obj\Debug\Condensador teste.csproj.CoreCompileInputs.cache
+C:\Users\joaoo\source\repos\Condensador teste\Condensador teste\obj\Debug\CalculadoraCapacitanciaCondensador.FormCalculadoraCapacitancia.resources
+C:\Users\joaoo\source\repos\Condensador teste\Condensador teste\obj\Debug\CalculadoraCondensador.FormCalculadoraCondensador.resources
