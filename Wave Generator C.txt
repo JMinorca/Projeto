@@ -1,0 +1,72 @@
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    FILE *gnuplotPipe = popen("gnuplot", "w");
+
+    if (gnuplotPipe != NULL) {
+        double amplitude, frequencia, intervalo;
+        char tipoOnda;
+
+        // Solicitar informações ao usuário
+        printf("Digite a amplitude da onda: ");
+        scanf("%lf", &amplitude);
+
+        printf("Digite a frequencia da onda em Hz: ");
+        scanf("%lf", &frequencia);
+
+        printf("Digite o intervalo de tempo em segundos: ");
+        scanf("%lf", &intervalo);
+
+        // Solicitar o tipo de onda ao usuário
+        printf("Escolha o tipo de onda (s para senoidal, t para triangular, q para quadrada): ");
+        scanf(" %c", &tipoOnda);
+
+        fprintf(gnuplotPipe, "set term wxt\n"); // Abre a janela de gráficos do gnuplot
+
+        // Comando gnuplot para plotar a onda escolhida
+        fprintf(gnuplotPipe, "plot '-' with lines title 'Onda'\n");
+
+        // Gera pontos para a onda e envia para o gnuplot com base no tipo escolhido
+        for (double tempo = 0; tempo <= intervalo; tempo += 0.01) {
+            double y;
+
+            switch (tipoOnda) {
+                case 's': // Senoidal
+                    y = amplitude * sin(2 * 3.14159265358979323846 * frequencia * tempo);
+                    break;
+                case 't': // Triangular
+                    y = amplitude * (2 * (tempo * frequencia - floor(tempo * frequencia + 0.5)));
+                    break;
+                case 'q': // Quadrada
+                    y = amplitude * (sin(2 * 3.14159265358979323846 * frequencia * tempo) > 0 ? 1 : -1);
+                    break;
+                default:
+                    printf("Tipo de onda não reconhecido.\n");
+                    pclose(gnuplotPipe);
+                    return 1;
+            }
+
+            fprintf(gnuplotPipe, "%f %f\n", tempo, y);
+        }
+
+        fprintf(gnuplotPipe, "e\n"); // Indica o final dos dados para o gnuplot
+
+        // Adiciona um comando para pausar a execução e manter a janela aberta
+        fprintf(gnuplotPipe, "pause mouse key\n");
+        fflush(gnuplotPipe);
+
+        // Aguarda pressionar Enter antes de fechar a janela
+        printf("Pressione Enter para sair...\n");
+        while (getchar() != '\n') {
+            // Aguarda até que o usuário pressione Enter
+        }
+
+        pclose(gnuplotPipe); // Fecha a conexão com o gnuplot
+    } else {
+        printf("Erro ao abrir o gnuplot. Certifique-se de que o gnuplot está instalado.\n");
+        return 1;
+    }
+
+    return 0;
+}
